@@ -159,6 +159,15 @@ class ChuangmiPlug(Device):
 
         return self.send("set_power", ["off"])
 
+    @command(default_output=format_output("togle output"))
+    def toggle(self):
+        """Power toggle."""
+        status = self.status().power
+        if status:
+            return self.off()
+
+        return self.on()
+
     @command(default_output=format_output("Powering USB on"))
     def usb_on(self):
         """Power on."""
